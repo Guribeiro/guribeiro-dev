@@ -7,6 +7,7 @@ export const Container = styled.section`
     a {
       font-weight: 300;
       transition: color 300ms;
+      color: ${({ theme }) => theme.colors.text};
       &:hover {
         color: ${({ theme }) => theme.colors.primary};
       }
