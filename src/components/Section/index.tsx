@@ -1,31 +1,10 @@
-import { ReactNode } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
+import { ChevronDown, ChevronUp } from 'react-feather';
+import { useSpring, animated } from 'react-spring';
 
-import styled from 'styled-components';
+import { useTheme } from '@/hooks/theme';
 
-const Container = styled.section`
-  padding: 2rem 0;
-
-  h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    padding-bottom: 1rem;
-  }
-
-  h3 {
-    font-size: 1.8rem;
-  }
-
-  i {
-    padding: 1rem 0;
-    line-height: 5rem;
-    font-size: 1.4rem;
-  }
-
-  p {
-    font-size: 1.5rem;
-    line-height: 2.5rem;
-  }
-`;
+import { Container } from './styles';
 
 interface SectionProps {
   label: string;
@@ -33,10 +12,33 @@ interface SectionProps {
 }
 
 const Section = ({ label, children }: SectionProps): JSX.Element => {
+  const [isContentVisible, setIsContentVisible] = useState(false);
+
+  const styles = useSpring({
+    to: { opacity: isContentVisible ? 1 : 0 },
+    from: { opacity: 0 },
+  });
+
+  const { theme } = useTheme();
+
+  const handleContentVisibility = useCallback(() => {
+    setIsContentVisible((prev) => !prev);
+  }, []);
+
   return (
     <Container>
-      <h2>{label}</h2>
-      {children}
+      <button onClick={handleContentVisibility}>
+        <h2>{label}</h2>
+        {isContentVisible ? (
+          <ChevronUp color={theme.colors.text} size={16} />
+        ) : (
+          <ChevronDown color={theme.colors.text} size={16} />
+        )}
+      </button>
+
+      {isContentVisible && (
+        <animated.div style={styles}>{children}</animated.div>
+      )}
     </Container>
   );
 };

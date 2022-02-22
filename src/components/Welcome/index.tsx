@@ -1,8 +1,7 @@
 import Lottie from 'react-lottie';
 
+import waveHandLottieAnimation from '@/assets/wave-hand.json';
 import styled from 'styled-components';
-
-import waveHandLottieAnimation from '../../assets/wave-hand.json';
 
 const Container = styled.section`
   display: flex;

@@ -1,12 +1,14 @@
 import { X } from 'react-feather';
 
+import { useTheme } from '@/hooks/theme';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const Container = styled.div`
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: #ffa027;
+  background-color: ${({ theme }) => theme.colors.primary};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +24,7 @@ const Container = styled.div`
 
   a {
     font-size: 2.5rem;
-    color: #1b1b1d;
+    color: ${({ theme }) => theme.colors.text};
     font-weight: 700;
   }
 
@@ -38,14 +40,21 @@ interface MenuProps {
 }
 
 const Menu = ({ onMenuClose }: MenuProps): JSX.Element => {
+  const { theme } = useTheme();
   return (
     <Container>
       <button onClick={onMenuClose}>
-        <X color="#ffffff" size={24} />
+        <X color={theme.colors.text} size={24} />
       </button>
-      <a href="/">About me</a>
-      <a>Portfolio</a>
-      <a href="contact">Contact me</a>
+      <Link href="/" prefetch>
+        <a>Home</a>
+      </Link>
+      <Link href="portfolio" prefetch>
+        <a>Portfólio</a>
+      </Link>
+      <Link href="contact" prefetch>
+        <a>Contato</a>
+      </Link>
     </Container>
   );
 };

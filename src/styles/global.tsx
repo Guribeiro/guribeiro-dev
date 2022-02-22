@@ -1,25 +1,10 @@
+import { useTheme } from '@/hooks/theme';
 import { createGlobalStyle } from 'styled-components';
 
-export const theme = {
-  colors: {
-    primary_black: '#151417',
-    secundary_black: '#1B1B1D',
-    yellow: '#ffa027',
-    title: '#14375E',
-    text: '#001C3C',
-    placeholder: '#285383',
-    input: '#285383',
-    button: '#00B7F8',
-    signout_button: '#d63031',
-    white: '#FFFFFF',
-    stroke: '#BABABA',
-    container: '#F6F6F6',
-  },
-} as const;
+const GlobalStyleComponent = (): JSX.Element => {
+  const { theme } = useTheme();
 
-export type ThemeType = typeof theme;
-
-export const GlobalStyle = createGlobalStyle`
+  const GlobalStyle = createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
@@ -42,9 +27,9 @@ export const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
   }
   body{
-    background: #151417;
+    background: ${theme.colors.background};
     font-size: 1.6rem;
-    color: #fff;
+    color: ${theme.colors.text};
     -webkit-font-smoothing: antialiased;
   }
   button{
@@ -63,7 +48,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   a{
     text-decoration: none;
-    color: #001C3C;
+    color: #FFF;
     font-size: 1.4rem;
     font-weight: 500;
     transition: .3s;
@@ -122,6 +107,8 @@ export const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-thumb:hover {
     background: #222222;
   }
-
-
 `;
+  return <GlobalStyle />;
+};
+
+export default GlobalStyleComponent;

@@ -23,13 +23,13 @@ export const Container = styled.header`
   }
 
   h1 {
-    color: #ecf0f1;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 3rem;
     font-weight: 700;
     padding-right: 2rem;
 
     span {
-      color: #ffa027;
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
 
@@ -44,7 +44,7 @@ export const Container = styled.header`
       display: inline-block;
       line-height: 5rem;
       position: relative;
-      color: #fff;
+      color: ${({ theme }) => theme.colors.text};
       font-weight: 500;
       font-size: 1.5rem;
       padding: 0 0.5rem;
@@ -54,7 +54,7 @@ export const Container = styled.header`
       }
 
       &.active {
-        color: #fff;
+        color: ${({ theme }) => theme.colors.text};
       }
 
       &.active::after {
@@ -63,7 +63,7 @@ export const Container = styled.header`
         width: 100%;
         height: 3px;
         border-radius: 3px 3px 0 0;
-        background: #ffa027;
+        background: ${({ theme }) => theme.colors.primary};
         bottom: 1px;
         right: 0;
       }
@@ -90,7 +90,6 @@ export const Container = styled.header`
 
   @media (max-width: 625px) {
     & {
-      section,
       nav {
         display: none;
       }

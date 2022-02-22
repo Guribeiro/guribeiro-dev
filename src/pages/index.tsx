@@ -1,43 +1,13 @@
 import { Instagram, Twitter, Linkedin } from 'react-feather';
 
-import styled from 'styled-components';
-
-import Section from '../components/Section';
-import Welcome from '../components/Welcome';
-
-const Main = styled.main`
-  max-width: 1120px;
-  padding: 2rem;
-  margin: 0 auto;
-
-  figure {
-    margin: 3rem 0 2rem;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      height: 12rem;
-      width: 12rem;
-      border-radius: 6rem;
-    }
-
-    figcaption {
-      margin-top: 2rem;
-
-      a + a {
-        margin-left: 3rem;
-      }
-    }
-  }
-
-  article {
-    border-bottom: 1px solid #1b1b1d;
-    padding: 2rem 0;
-  }
-`;
+import Section from '@/components/Section';
+import Welcome from '@/components/Welcome';
+import { useTheme } from '@/hooks/theme';
+import { Main } from '@/styles';
 
 export default function Home() {
+  const { theme } = useTheme();
+
   return (
     <>
       <Main>
@@ -52,41 +22,52 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <Instagram color="#fff" size={16} />
+              <Instagram color={theme.colors.text} size={16} />
             </a>
             <a
               href="https://www.linkedin.com/in/gustavohribeiro/"
               target="_blank"
               rel="noreferrer"
             >
-              <Linkedin color="#fff" size={16} />
+              <Linkedin color={theme.colors.text} size={16} />
             </a>
             <a
               href="https://twitter.com/Guribeir"
               target="_blank"
               rel="noreferrer"
             >
-              <Twitter color="#fff" size={16} />
+              <Twitter color={theme.colors.text} size={16} />
             </a>
           </figcaption>
         </figure>
 
-        <Welcome>Hello there</Welcome>
+        <Welcome>Olá</Welcome>
 
-        <Section label="Why me 😉">
+        <Section label="😎 Quem sou Eu">
           <p>
-            Lorem Ipsum has been the industrys standard dummy text ever since
-            the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            Há dois anos me apaixonei por programação quando dei início ao curso
+            de ADS e desde então venho estudando e praticando bastante, foi mais
+            ou menos quando eu comecei a ouvir falar da rocketseat 💜
+          </p>
+          <br />
+          <p>
+            Atualmente estou trabalhando em uma software house, estou tendo a
+            oportunidade de aprender muita coisa nova e colocar em prática muito
+            do que eu aprendi e sigo aprendendo durante os meus estudos
+          </p>
+          <br />
+          <p>
+            Estou super aberto para ajudar as pessoas, seja com dúvidas
+            tecnicas, problemas no código ou uma mãozinha em algum projeto
+          </p>
+          <br />
+          <p>
+            Bora bater um papo, tenho certeza que eu vou adorar te conhecer e
+            saber um pouco da sua jornada e o que te motiva 🤟
           </p>
         </Section>
 
-        <Section label="Work experience 👩🏻‍💻 ">
+        <Section label="👩🏻‍💻 Experiência de trabalho">
           <article>
             <h3>Fullstack developer</h3>
             <i>Softwrap, Remote - (01/05/2021 - 24/12/2021)</i>
@@ -106,7 +87,10 @@ export default function Home() {
 
           <article>
             <h3>Conferente</h3>
-            <i>Express Transportes Urbanos LTDA – (01/09/2014 - 01/12/2019)</i>
+            <i>
+              Express Transportes Urbanos LTDA, Local – (01/09/2014 -
+              01/12/2019)
+            </i>
             <p>
               Como conferente, atuei em diversos segmentos do setor da
               Recebedoria, verificando irregularidades nas validações dos
@@ -118,9 +102,9 @@ export default function Home() {
             </p>
           </article>
         </Section>
-        <Section label="Skills 🛠">
+        <Section label="🛠 Habilidades">
           <article>
-            <h3>Tecnologias 💻 </h3>
+            <h3>💻 Tecnologias</h3>
             <i>Javascript</i>
             <p>
               Minha linguaguem de programação nativa é o Javascript, a qual eu
@@ -134,7 +118,7 @@ export default function Home() {
             </p>
           </article>
           <article>
-            <h3>Languages 🗣 </h3>
+            <h3>🗣 Languages </h3>
             <i>English</i>
             <p>
               1 ano estudando sozinho e 2 anos estudando no CNA. Consigo ler
@@ -145,7 +129,7 @@ export default function Home() {
             <p>Falante nativo</p>
           </article>
         </Section>
-        <Section label="Education 📚">
+        <Section label="📚 Educação">
           <article>
             <h3>GOSTACK BOOTCAMP</h3>
             <i>Concluído em 04/02/2021</i>

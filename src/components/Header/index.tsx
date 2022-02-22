@@ -1,11 +1,15 @@
-import { Linkedin, Twitter, Menu, X } from 'react-feather';
+import DarkModeToggle from 'react-dark-mode-toggle';
+import { Menu, X } from 'react-feather';
 
-import { useMenu } from '../../hooks/menu';
-import ActiveLink from '../ActiveLink';
+import ActiveLink from '@/components/ActiveLink';
+import { useMenu } from '@/hooks/menu';
+import { useTheme } from '@/hooks/theme';
+
 import { Container } from './styles';
 
 const Header = (): JSX.Element => {
   const { isMenuOpen, onMenuOpen } = useMenu();
+  const { toggleTheme, theme } = useTheme();
   return (
     <Container>
       <div>
@@ -14,30 +18,30 @@ const Header = (): JSX.Element => {
         </h1>
         <nav>
           <ActiveLink href="/" activeClassName="active">
-            <a>About me</a>
+            <a>Home</a>
           </ActiveLink>
           <ActiveLink href="/portfolio" activeClassName="active">
-            <a>Portfolio</a>
+            <a>Portfólio</a>
           </ActiveLink>
           <ActiveLink href="/contact" activeClassName="active">
-            <a>Contact me</a>
+            <a>Contato</a>
           </ActiveLink>
         </nav>
 
         <section>
-          <a className="social-button">
-            <Linkedin color="#fff" size={16} />
-          </a>
-          <a className="social-button">
-            <Twitter color="#fff" size={16} />
-          </a>
+          <DarkModeToggle
+            onChange={() => toggleTheme()}
+            checked={theme.title === 'dark' ? true : false}
+            className="toggle"
+            speed={5}
+          />
         </section>
 
         <button onClick={onMenuOpen} className="menu-button">
           {isMenuOpen ? (
-            <X color="#fff" size={24} />
+            <X color={theme.colors.text} size={24} />
           ) : (
-            <Menu color="#fff" size={24} />
+            <Menu color={theme.colors.text} size={24} />
           )}
         </button>
       </div>
