@@ -20,8 +20,30 @@ export const Main = styled.main`
     figcaption {
       margin-top: 2rem;
 
-      a + a {
-        margin-left: 3rem;
+      a {
+        & + a {
+          margin-left: 5rem;
+        }
+
+        svg {
+          transition: 300ms;
+        }
+
+        &:hover {
+          .twitter {
+            fill: #1da1f2;
+            stroke: #1da1f2;
+          }
+
+          .instagram {
+            stroke: #833ab4;
+          }
+
+          .linkedin {
+            stroke: #2867b2;
+            fill: #2867b2;
+          }
+        }
       }
     }
   }

@@ -3,6 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.section`
   padding: 2rem 0;
 
+  article {
+    a {
+      font-weight: 300;
+      transition: color 300ms;
+      &:hover {
+        color: ${({ theme }) => theme.colors.primary};
+      }
+    }
+  }
+
   button {
     display: flex;
     flex-direction: row;

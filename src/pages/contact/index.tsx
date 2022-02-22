@@ -73,7 +73,7 @@ const Contact = (): JSX.Element => {
           />
         </div>
         <Welcome>Diga um Olá</Welcome>
-        <Section label="Informações de contato">
+        <Section label="✉️ Informações de contato">
           <article>
             <i>Endereço de email</i>
 
