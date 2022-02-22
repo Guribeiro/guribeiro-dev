@@ -25,7 +25,7 @@ interface Props {
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 
 const ThemeProvider = ({ children }: Props): JSX.Element => {
-  const [theme, setTheme] = useState<Theme>(light);
+  const [theme, setTheme] = useState<Theme>(dark);
 
   useEffect(() => {
     const loadPersistentTheme = () => {
