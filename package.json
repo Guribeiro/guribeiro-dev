@@ -9,6 +9,11 @@
     "lint": "next lint",
     "slicemachine": "start-slicemachine"
   },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
   "dependencies": {
     "@prismicio/client": "5.1.1",
     "@prismicio/slice-simulator-react": "^0.2.0",
