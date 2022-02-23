@@ -1,8 +1,21 @@
+import { HTMLAttributes, useEffect } from 'react';
 import { X } from 'react-feather';
 
 import { useTheme } from '@/hooks/theme';
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const showMenu = css`
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 500ms;
+`;
+
+const hideMenu = css`
+  opacity: 0;
+  transform: translateY(-1000px);
+  transition: transform 500ms;
+`;
 
 const Container = styled.div`
   position: absolute;
@@ -13,7 +26,15 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  z-index: 1;
+  z-index: 999;
+
+  &.show-menu {
+    animation: ${showMenu} 1s;
+  }
+
+  &.hide-menu {
+    animation: ${hideMenu} 1s;
+  }
 
   button {
     position: absolute;
@@ -35,25 +56,26 @@ const Container = styled.div`
   }
 `;
 
-interface MenuProps {
+interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   onMenuClose(): void;
 }
 
-const Menu = ({ onMenuClose }: MenuProps): JSX.Element => {
+const Menu = ({ onMenuClose, className, ...rest }: MenuProps): JSX.Element => {
   const { theme } = useTheme();
+
   return (
-    <Container>
+    <Container className={className} {...rest}>
       <button onClick={onMenuClose}>
         <X color={theme.colors.text} size={24} />
       </button>
-      <Link href="/" prefetch>
-        <a>Home</a>
+      <Link href="/">
+        <a onClick={onMenuClose}>Home</a>
       </Link>
-      <Link href="portfolio" prefetch>
-        <a>Portfólio</a>
+      <Link href="portfolio">
+        <a onClick={onMenuClose}>Portfólio</a>
       </Link>
-      <Link href="contact" prefetch>
-        <a>Contato</a>
+      <Link href="contact">
+        <a onClick={onMenuClose}>Contato</a>
       </Link>
     </Container>
   );

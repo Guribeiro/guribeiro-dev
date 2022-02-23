@@ -30,9 +30,11 @@ const MenuProvider = ({ children }: MenuProviderProps): JSX.Element => {
     setIsMenuOpen(false);
   }, []);
 
+  const className = isMenuOpen ? 'show-menu' : 'hide-menu';
+
   return (
     <MenuContext.Provider value={{ isMenuOpen, onMenuOpen }}>
-      {isMenuOpen && <Menu onMenuClose={onMenuClose} />}
+      <Menu className={className} onMenuClose={onMenuClose} />
       {children}
     </MenuContext.Provider>
   );

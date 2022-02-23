@@ -88,6 +88,7 @@ export default function Home({
             </article>
           ))}
         </Section>
+
         <Section label="🛠 Habilidades">
           <article>
             <h3>💻 Tecnologias</h3>
