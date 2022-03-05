@@ -1,4 +1,5 @@
 import { useTheme } from '@/hooks/theme';
+import { lighten } from 'polished';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyleComponent = (): JSX.Element => {
@@ -90,7 +91,7 @@ const GlobalStyleComponent = (): JSX.Element => {
 
   ::-webkit-scrollbar {
     width: 8px;
-    display: none;
+    /* display: none; */
   }
 
   /* Track */
@@ -100,7 +101,7 @@ const GlobalStyleComponent = (): JSX.Element => {
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #1B1B1D;
+    background: ${lighten(0.1, `${'#1b1b1b'}`)};
   }
 
   /* Handle on hover */

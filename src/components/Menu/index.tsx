@@ -8,13 +8,13 @@ import styled, { css } from 'styled-components';
 const showMenu = css`
   opacity: 1;
   transform: translateY(0);
-  transition: transform 500ms;
+  transition: transform 300ms;
 `;
 
 const hideMenu = css`
   opacity: 0;
   transform: translateY(-1000px);
-  transition: transform 500ms;
+  transition: transform 300ms;
 `;
 
 const Container = styled.div`

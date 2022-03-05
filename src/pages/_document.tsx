@@ -46,7 +46,6 @@ export default class MyDocument extends Document {
             name="description"
             content="Gustavo Henrique Ribeiro Dias personal website"
           />
-          <title>Gustavo Henrique Ribeiro - Developer</title>
         </Head>
         <body>
           <Main />

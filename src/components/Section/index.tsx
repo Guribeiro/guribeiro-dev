@@ -29,11 +29,11 @@ const Section = ({ label, children }: SectionProps): JSX.Element => {
     <Container>
       <button onClick={handleContentVisibility}>
         <h2>{label}</h2>
-        {isContentVisible ? (
-          <ChevronUp color={theme.colors.text} size={16} />
-        ) : (
-          <ChevronDown color={theme.colors.text} size={16} />
-        )}
+        <ChevronDown
+          className={isContentVisible ? 'chevron-down' : 'chevron-up'}
+          color={theme.colors.text}
+          size={16}
+        />
       </button>
 
       {isContentVisible && (

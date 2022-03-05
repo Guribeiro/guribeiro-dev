@@ -1,9 +1,14 @@
+import { ToastContainer } from 'react-toastify';
+
 import Header from '@/components/Header';
+import { EmailProvider } from '@/hooks/email';
+import { GithubProvider } from '@/hooks/github';
 import { MenuProvider } from '@/hooks/menu';
 import { ThemeProvider } from '@/hooks/theme';
 import GlobalStyle from '@/styles/global';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -20,8 +25,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider>
         <GlobalStyle />
         <MenuProvider>
-          <Header />
-          <Component {...pageProps} />
+          <GithubProvider>
+            <EmailProvider>
+              <Header />
+              <Component {...pageProps} />
+              <ToastContainer />
+            </EmailProvider>
+          </GithubProvider>
         </MenuProvider>
       </ThemeProvider>
     </>

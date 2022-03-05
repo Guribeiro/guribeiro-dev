@@ -1,5 +1,6 @@
 import { Instagram, Twitter, Linkedin } from 'react-feather';
 
+import Avatar from '@/components/Avatar';
 import Section from '@/components/Section';
 import Welcome from '@/components/Welcome';
 import { useTheme } from '@/hooks/theme';
@@ -21,10 +22,7 @@ export default function Home({
     <>
       <Main>
         <figure>
-          <img
-            src="https://avatars.githubusercontent.com/u/50778163?v=4"
-            alt="Foto de Gustavo Henrique Ribeiro Dias"
-          />
+          <Avatar />
           <figcaption>
             <a
               href="https://www.instagram.com/gustavhrd/?hl=pt-br"

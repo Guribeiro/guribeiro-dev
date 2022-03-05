@@ -26,8 +26,18 @@ export const Container = styled.section`
       color: ${({ theme }) => theme.colors.text};
     }
 
-    svg {
+    > svg {
       margin-left: 1rem;
+
+      &.chevron-up {
+        transform: rotate(0deg);
+        transition: transform 300ms;
+      }
+
+      &.chevron-down {
+        transform: rotate(-180deg);
+        transition: transform 300ms;
+      }
     }
   }
 

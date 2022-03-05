@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Container = styled.section`
   display: flex;
   align-items: center;
-  padding: 2rem 0;
+  padding: 1rem 0;
 
   h1 {
     font-size: 3rem;

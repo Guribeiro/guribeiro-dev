@@ -1,62 +1,85 @@
-import { Phone } from 'react-feather';
+import { useCallback, useRef } from 'react';
 import Lottie from 'react-lottie';
+import { toast } from 'react-toastify';
 
 import mailLottieAnimation from '@/assets/mail-lottie.json';
+import Input from '@/components/Input';
+import Loader from '@/components/Loader';
 import Section from '@/components/Section';
-import Welcome from '@/components/Welcome';
+import { useEmail } from '@/hooks/email';
+import { options } from '@/utils/toastOptions';
+import getValidationErrors from '@/utils/validationErrors';
+import whatsapp from '@/utils/whatsapp';
+import { FormHandles } from '@unform/core';
 import Head from 'next/head';
-import styled from 'styled-components';
+import * as Yup from 'yup';
 
 import GmailIcon from '../../assets/gmail.svg';
 import OutlookIcon from '../../assets/outlook.svg';
+import WhatsappIcon from '../../assets/whatsapp.svg';
+import { Main, Form } from './styles';
 
-const Main = styled.main`
-  max-width: 1120px;
-  padding: 2rem;
-  margin: 0 auto;
-
-  .mail-lottie-container {
-    max-width: 260px;
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  .row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    a {
-      margin-left: 1rem;
-      transition: color 300ms;
-      line-height: 5rem;
-      color: ${({ theme }) => theme.colors.text};
-
-      &:hover {
-        color: ${({ theme }) => theme.colors.primary};
-      }
-    }
-  }
-
-  > a {
-    height: 5rem;
-    width: 5rem;
-
-    border-radius: 4rem;
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    background-color: #0cb755;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
+interface FormProps {
+  sender_name: string;
+  sender_email: string;
+  text: string;
+}
 
 const Contact = (): JSX.Element => {
-  const whatsappLink =
-    'https://api.whatsapp.com/send?phone=5511968657222&text=Ol%C3%A1%2C%20Gustavo.%20Estou%20entrando%20em%20contato%20atrav%C3%A9s%20do%20link%20do%20seu%20site.%20Tem%20um%20tempinho%20para%20conversarmos%20%3F';
+  const formRef = useRef<FormHandles>(null);
+
+  const { sendEmail, loading } = useEmail();
+
+  const initialData: FormProps = {
+    sender_name: '',
+    sender_email: '',
+    text: '',
+  };
+  const onSubmit = useCallback(
+    async ({ sender_name, sender_email, text }: FormProps) => {
+      try {
+        const schema = Yup.object().shape({
+          sender_name: Yup.string().required('Nome obrigatório'),
+          sender_email: Yup.string()
+            .email('Preencha com um email válido')
+            .required('Email obrigatório'),
+          text: Yup.string().required('Você deve preencher a sua mensagem'),
+        });
+
+        await schema.validate(
+          {
+            sender_name,
+            sender_email,
+            text,
+          },
+          {
+            abortEarly: false,
+          }
+        );
+
+        await sendEmail({
+          sender_name,
+          sender_email,
+          text,
+        });
+
+        toast.success('seu email foi enviado com sucesso', options);
+
+        formRef.current.setErrors({});
+        formRef.current.reset();
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+
+          formRef.current.setErrors(errors);
+          return;
+        }
+
+        toast.error(error, options);
+      }
+    },
+    [sendEmail]
+  );
   return (
     <>
       <Head>
@@ -72,28 +95,32 @@ const Contact = (): JSX.Element => {
             }}
           />
         </div>
-        <Welcome>Diga um Olá</Welcome>
-        <Section label="✉️ Informações de contato">
-          <article>
-            <i>Endereço de email</i>
+        <Section label="📬 Formulário de contato">
+          <Form ref={formRef} initialData={initialData} onSubmit={onSubmit}>
+            <Input name="sender_name" placeholder="Nome completo" />
+            <Input name="sender_email" placeholder="Email" type="email" />
+            <Input name="text" textarea placeholder="Sua mensagem aqui" />
 
+            {loading ? <Loader /> : <button type="submit">Enviar</button>}
+          </Form>
+        </Section>
+        <Section label="✉️ Outras opções de contato">
+          <article>
             <div className="row">
-              <OutlookIcon />
               <a href="mailto:gugahribeiro@hotmail.com">
-                gugahribeiro@hotmail.com
+                <OutlookIcon />
               </a>
-            </div>
-            <div className="row">
-              <GmailIcon />
+
               <a href="mailto:gustavribeirod@gmail.com">
-                gustavribeirod@gmail.com
+                <GmailIcon />
+              </a>
+
+              <a href={whatsapp} target="_blank" rel="noreferrer">
+                <WhatsappIcon />
               </a>
             </div>
           </article>
         </Section>
-        <a href={whatsappLink} target="_blank" rel="noreferrer">
-          <Phone size={24} color="#FFFFFF" />
-        </a>
       </Main>
     </>
   );
