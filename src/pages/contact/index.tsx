@@ -7,6 +7,7 @@ import Input from '@/components/Input';
 import Loader from '@/components/Loader';
 import Section from '@/components/Section';
 import { useEmail } from '@/hooks/email';
+import { Main, Form } from '@/styles/contact';
 import { options } from '@/utils/toastOptions';
 import getValidationErrors from '@/utils/validationErrors';
 import whatsapp from '@/utils/whatsapp';
@@ -17,7 +18,6 @@ import * as Yup from 'yup';
 import GmailIcon from '../../assets/gmail.svg';
 import OutlookIcon from '../../assets/outlook.svg';
 import WhatsappIcon from '../../assets/whatsapp.svg';
-import { Main, Form } from './styles';
 
 interface FormProps {
   sender_name: string;

@@ -10,8 +10,7 @@ import Repository from '@/components/Repository';
 import Section from '@/components/Section';
 import { useGithub } from '@/hooks/github';
 import { useTheme } from '@/hooks/theme';
-
-import { StyledInifiteScroll } from './styles';
+import { StyledInifiteScroll } from '@/styles/portfolio';
 
 const Portfolio = (): JSX.Element => {
   const { repositories, loadMore, repositoriesAmout, languages } = useGithub();
