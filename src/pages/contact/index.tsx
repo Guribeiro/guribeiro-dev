@@ -10,7 +10,6 @@ import { useEmail } from '@/hooks/email';
 import { Main, Form } from '@/styles/contact';
 import { options } from '@/utils/toastOptions';
 import getValidationErrors from '@/utils/validationErrors';
-import whatsapp from '@/utils/whatsapp';
 import { FormHandles } from '@unform/core';
 import Head from 'next/head';
 import * as Yup from 'yup';
@@ -115,7 +114,11 @@ const Contact = (): JSX.Element => {
                 <GmailIcon />
               </a>
 
-              <a href={whatsapp} target="_blank" rel="noreferrer">
+              <a
+                href={process.env.NEXT_PUBLIC_WHATSAPP_LINK}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <WhatsappIcon />
               </a>
             </div>

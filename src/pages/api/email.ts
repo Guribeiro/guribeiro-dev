@@ -13,6 +13,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
   if (method === 'POST') {
     const transporter = createTransport({
+      service: 'Gmail',
       host: process.env.NODEMAILER_HOST,
       port: Number(process.env.NODEMAILER_PORT),
       auth: {
@@ -26,6 +27,8 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       },
     });
     try {
+      await transporter.verify();
+
       await transporter.sendMail({
         text,
         subject: `${sender_name} - ${sender_email}`,

@@ -1,1 +1,0 @@
-export default 'https://api.whatsapp.com/send?phone=5511968657222&text=Ol%C3%A1%2C%20Gustavo.%20Estou%20entrando%20em%20contato%20atrav%C3%A9s%20do%20link%20do%20seu%20site.%20Tem%20um%20tempinho%20para%20conversarmos%20%3F';
