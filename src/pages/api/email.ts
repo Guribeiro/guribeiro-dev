@@ -15,11 +15,12 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     const transporter = createTransport({
       host: process.env.NODEMAILER_HOST,
       port: Number(process.env.NODEMAILER_PORT),
-      secure: false,
       auth: {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASS,
       },
+      secure: false,
+      ignoreTLS: true,
       tls: {
         rejectUnauthorized: true,
       },
